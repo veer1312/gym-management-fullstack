@@ -1,0 +1,380 @@
+<app-loader></app-loader>
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumb">
+        <span>Dashboard</span>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Payment</span>
+      </div>
+
+      <h1>Payment</h1>
+      <p>Record a membership payment for an existing member.</p>
+    </div>
+
+    <button type="button" class="btn-back" routerLink="/user/members">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Members
+    </button>
+  </div>
+
+
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+
+    <!-- ===================================================== -->
+    <!-- MEMBER & MEMBERSHIP - TOP -->
+    <!-- ===================================================== -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div>
+          <h3>Member & Membership</h3>
+          <p>Select an existing member and membership details.</p>
+        </div>
+      </div>
+
+
+      <!-- Member Summary -->
+      <div class="member-summary mb-4" *ngIf="getSelectedMember() as member">
+
+        <div class="member-avatar">
+          {{ member.name?.charAt(0)?.toUpperCase() }}
+        </div>
+
+        <div class="member-details">
+          <h3>{{ member.name }}</h3>
+
+          <span>
+            {{ member.email }} • {{ member.contactNumber }}
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- Member Fields -->
+      <div class="form-grid three">
+
+        <!-- Select Member -->
+        <div class="form-group">
+
+          <label class="form-label required">
+            Select Member
+          </label>
+
+          <select class="form-select" formControlName="userId">
+
+            <option [ngValue]="null">
+              {{ loadingMembers ? 'Loading members...' : 'Select member' }}
+            </option>
+
+            <option *ngFor="let member of members" [ngValue]="member.id">
+
+              {{ member.name }} - {{ member.contactNumber }}
+
+            </option>
+
+          </select>
+
+          <small class="text-danger" *ngIf="
+              submitted &&
+              paymentForm.get('userId')?.invalid
+            ">
+            Please select a member.
+          </small>
+
+        </div>
+
+
+        <!-- Membership Plan -->
+        <div class="form-group">
+
+          <label class="form-label required">
+            Membership Plan
+          </label>
+
+          <select class="form-select" formControlName="membershipId">
+
+            <option [ngValue]="null">
+              {{ loadingPlans ? 'Loading plans...' : 'Select plan' }}
+            </option>
+
+            <option *ngFor="let plan of membershipPlans" [ngValue]="plan.id">
+
+              {{ plan.membership }}
+
+            </option>
+
+          </select>
+
+          <small class="text-danger" *ngIf="
+              submitted &&
+              paymentForm.get('membershipId')?.invalid
+            ">
+            Please select a membership plan.
+          </small>
+
+        </div>
+
+
+        <!-- Start Date -->
+        <div class="form-group">
+
+          <label class="form-label required">
+            Start Date
+          </label>
+
+          <input type="date" class="form-select" formControlName="membershipStartDate">
+
+          <small class="text-danger" *ngIf="
+              submitted &&
+              paymentForm.get('membershipStartDate')?.invalid
+            ">
+            Start date is required.
+          </small>
+
+        </div>
+
+
+        <!-- End Date -->
+        <div class="form-group">
+
+          <label class="form-label">
+            End Date
+          </label>
+
+          <input type="date" class="form-select" formControlName="membershipEndDate">
+
+        </div>
+
+      </div>
+
+
+      <!-- Selected Membership -->
+      <div class="payment-month-card mt-4" *ngIf="getSelectedPlan() as plan">
+
+        <div>
+          <span>Selected Membership</span>
+          <strong>{{ plan.membership }}</strong>
+        </div>
+
+        <div class="payment-status pending">
+          Membership Selected
+        </div>
+
+      </div>
+
+
+      <!-- Member Details -->
+      <div class="details-grid mt-4" *ngIf="getSelectedMember() as member">
+
+        <div class="detail-item">
+          <label>Email</label>
+          <strong>{{ member.email || '-' }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Contact</label>
+          <strong>{{ member.contactNumber || '-' }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Current Membership</label>
+          <strong>{{ member.membership || '-' }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <label>Current Status</label>
+          <strong>{{ member.status || '-' }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- PAYMENT INFORMATION - BELOW -->
+    <!-- ===================================================== -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+
+        <div>
+          <h3>Payment Information</h3>
+          <p>Enter payment details for this membership.</p>
+        </div>
+      </div>
+
+
+      <!-- Payment Fields -->
+      <div class="form-grid three">
+
+        <!-- Amount -->
+        <div class="form-group">
+
+          <label class="form-label required">
+            Amount
+          </label>
+
+          <div class="amount-box">
+
+            <span>₹</span>
+
+            <input type="number" formControlName="amount" placeholder="Enter amount" min="1">
+
+          </div>
+
+          <small class="text-danger" *ngIf="
+              submitted &&
+              paymentForm.get('amount')?.invalid
+            ">
+            Enter a valid amount.
+          </small>
+
+        </div>
+
+
+        <!-- Payment Method -->
+        <div class="form-group">
+
+          <label class="form-label required">
+            Payment Method
+          </label>
+
+          <select class="form-select" formControlName="paymentMethod">
+
+            <option value="">
+              Select method
+            </option>
+
+            <option value="Cash">
+              Cash
+            </option>
+
+            <option value="UPI">
+              UPI
+            </option>
+
+            <option value="Card">
+              Card
+            </option>
+
+            <option value="Net Banking">
+              Net Banking
+            </option>
+
+          </select>
+
+          <small class="text-danger" *ngIf="
+              submitted &&
+              paymentForm.get('paymentMethod')?.invalid
+            ">
+            Please select payment method.
+          </small>
+
+        </div>
+
+
+        <!-- Payment Date -->
+        <div class="form-group">
+
+          <label class="form-label">
+            Payment Date
+          </label>
+
+          <input type="date" class="form-select" [value]="today | date:'yyyy-MM-dd'" disabled>
+
+        </div>
+
+      </div>
+
+
+      <!-- Payment Summary -->
+      <div class="payment-summary">
+
+        <div class="summary-row">
+
+          <span>Member</span>
+
+          <strong>
+            {{ getSelectedMember()?.name || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>Membership</span>
+
+          <strong>
+            {{ getSelectedPlan()?.membership || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>Payment Method</span>
+
+          <strong>
+            {{ paymentForm.get('paymentMethod')?.value || '-' }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="summary-row total">
+
+          <span>Total Amount</span>
+
+          <strong>
+            ₹{{ paymentForm.get('amount')?.value || '0' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- Actions -->
+      <div class="form-actions">
+
+        <button type="button" class="btn-cancel" routerLink="/user/members">
+
+          Cancel
+
+        </button>
+
+        <button type="submit" class="btn-primary" [disabled]="loading">
+
+          <i class="fa-solid" [ngClass]="loading ? 'fa-spinner fa-spin' : 'fa-check'">
+          </i>
+
+          {{ loading ? 'Processing...' : 'Make Payment' }}
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

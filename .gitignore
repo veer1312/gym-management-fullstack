@@ -1,0 +1,18 @@
+
+# Angular
+angular for java/node_modules/
+angular for java/dist/
+angular for java/.angular/
+
+# Java / Spring Boot
+Java backend/target/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Secrets
+.env
+.env.*
+application-local.properties

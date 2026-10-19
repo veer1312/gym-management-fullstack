@@ -1,0 +1,51 @@
+.app-layout {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #0d0d0d;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+.app-body {
+  flex: 1;
+
+  display: flex;
+
+  position: relative;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-content {
+  flex: 1;
+
+  margin-left: 250px;
+
+  min-width: 0;
+
+  transition: margin-left 0.25s ease;
+
+  background: #0d0d0d;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .main-content {
+    margin-left: 0;
+  }
+
+}

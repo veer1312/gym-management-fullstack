@@ -1,0 +1,532 @@
+/* ================================
+   MEMBER DETAILS PAGE
+================================ */
+
+.member-details-page {
+  width: 100%;
+  padding: 25px;
+  color: #ffffff;
+}
+
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.page-header h2 i {
+  margin-right: 10px;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+  color: #8d8d8d;
+  font-size: 14px;
+}
+
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-btn {
+  border: 1px solid #333333;
+  background: #171717;
+  color: #ffffff;
+  padding: 9px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.back-btn i {
+  margin-right: 7px;
+}
+
+.back-btn:hover {
+  background: #242424;
+  border-color: #444444;
+}
+
+
+/* ================================
+   MEMBER CARD
+================================ */
+
+.member-card,
+.payment-card {
+  background: #111111;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+
+/* ================================
+   MEMBER HEADER
+================================ */
+
+.member-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 25px;
+  border-bottom: 1px solid #292929;
+}
+
+.member-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.member-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #1e1e1e;
+  border: 1px solid #353535;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  color: #ffffff;
+}
+
+.member-profile h3 {
+  margin: 0 0 5px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.member-id {
+  color: #888888;
+  font-size: 13px;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge i {
+  font-size: 7px;
+  margin-right: 6px;
+}
+
+.status-badge.active {
+  background: rgba(40, 167, 69, 0.12);
+  color: #4cd964;
+}
+
+
+/* ================================
+   MEMBER INFORMATION
+================================ */
+
+.member-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.info-item {
+  padding: 18px 25px;
+  border-right: 1px solid #292929;
+  border-bottom: 1px solid #292929;
+}
+
+.info-item:nth-child(3n) {
+  border-right: none;
+}
+
+.info-item:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+.info-label {
+  display: block;
+  color: #777777;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.info-label i {
+  margin-right: 6px;
+}
+
+.info-item strong {
+  color: #eeeeee;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* ================================
+   PAYMENT CARD
+================================ */
+
+.payment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  border-bottom: 1px solid #292929;
+}
+
+.payment-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.payment-header h3 i {
+  margin-right: 8px;
+}
+
+.payment-header p {
+  margin: 5px 0 0;
+  color: #777777;
+  font-size: 13px;
+}
+
+.total-payment {
+  text-align: right;
+}
+
+.total-payment span {
+  display: block;
+  color: #777777;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.total-payment strong {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+
+/* ================================
+   PAYMENT TABLE
+================================ */
+
+.payment-table-wrapper {
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+
+/* Custom scrollbar */
+
+.payment-table-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.payment-table-wrapper::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+.payment-table-wrapper::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 10px;
+}
+
+.payment-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+
+.payment-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 750px;
+}
+
+.payment-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #181818;
+}
+
+.payment-table th {
+  padding: 13px 18px;
+  text-align: left;
+  color: #888888;
+  font-size: 12px;
+  font-weight: 500;
+  border-bottom: 1px solid #292929;
+  white-space: nowrap;
+}
+
+.payment-table td {
+  padding: 15px 18px;
+  color: #cccccc;
+  font-size: 13px;
+  border-bottom: 1px solid #222222;
+  white-space: nowrap;
+}
+
+.payment-table tbody tr {
+  transition: 0.15s ease;
+}
+
+.payment-table tbody tr:hover {
+  background: #181818;
+}
+
+.payment-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ================================
+   PAYMENT DATA
+================================ */
+
+.date {
+  color: #dddddd;
+}
+
+.amount {
+  color: #ffffff;
+}
+
+.payment-method {
+  color: #bbbbbb;
+}
+
+.payment-method i {
+  margin-right: 7px;
+  font-size: 12px;
+}
+
+.payment-status {
+  color: #4cd964;
+  font-size: 12px;
+}
+
+.payment-status i {
+  margin-right: 5px;
+}
+
+
+/* ================================
+   MEMBERSHIP BADGES
+================================ */
+
+.membership-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.membership-badge.yearly {
+  background: rgba(255, 193, 7, 0.12);
+  color: #ffc107;
+}
+
+.membership-badge.half-yearly {
+  background: rgba(0, 188, 212, 0.12);
+  color: #00bcd4;
+}
+
+.membership-badge.quarterly {
+  background: rgba(156, 39, 176, 0.12);
+  color: #ce93d8;
+}
+
+.membership-badge.monthly {
+  background: rgba(33, 150, 243, 0.12);
+  color: #64b5f6;
+}
+
+
+/* ================================
+   PAGINATION
+================================ */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-top: 1px solid #292929;
+}
+
+.pagination-info {
+  color: #777777;
+  font-size: 12px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.page-btn {
+  min-width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #303030;
+  background: #171717;
+  color: #bbbbbb;
+
+  border-radius: 5px;
+  cursor: pointer;
+
+  font-size: 12px;
+  transition: 0.2s ease;
+}
+
+.page-btn:hover:not(.disabled) {
+  background: #252525;
+  color: #ffffff;
+}
+
+.page-btn.active {
+  background: #ffffff;
+  color: #111111;
+  border-color: #ffffff;
+  font-weight: 600;
+}
+
+.page-btn.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 992px) {
+
+  .member-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info-item:nth-child(3n) {
+    border-right: 1px solid #292929;
+  }
+
+  .info-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .info-item:nth-last-child(-n + 3) {
+    border-bottom: 1px solid #292929;
+  }
+
+  .info-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .member-details-page {
+    padding: 15px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+  }
+
+  .page-header h2 {
+    font-size: 20px;
+  }
+
+  .member-card-header {
+    padding: 18px;
+  }
+
+  .member-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item,
+  .info-item:nth-child(2n),
+  .info-item:nth-child(3n) {
+    border-right: none;
+    border-bottom: 1px solid #292929;
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  .payment-header {
+    padding: 18px;
+  }
+
+  .total-payment {
+    display: none;
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .member-card-header {
+    align-items: flex-start;
+  }
+
+  .member-profile h3 {
+    font-size: 17px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 5px 9px;
+  }
+
+  .member-avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .page-header .back-btn {
+    padding: 7px 10px;
+  }
+}

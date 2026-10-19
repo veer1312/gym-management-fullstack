@@ -1,0 +1,61 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
+/* Dark theme for all edit page inputs */
+.detail-item .form-control,
+.detail-item .form-select,
+.membership-box .form-control,
+.membership-box .form-select {
+    background-color: #151515 !important;
+    color: #ffffff !important;
+    border: 1px solid #303030 !important;
+    box-shadow: none !important;
+}
+
+/* Placeholder */
+.detail-item .form-control::placeholder {
+    color: #777 !important;
+}
+
+/* Focus */
+.detail-item .form-control:focus,
+.detail-item .form-select:focus,
+.membership-box .form-control:focus,
+.membership-box .form-select:focus {
+    background-color: #151515 !important;
+    color: #ffffff !important;
+    border-color: #ed0712 !important;
+    box-shadow: 0 0 0 2px rgba(237, 7, 18, 0.15) !important;
+}
+
+/* Select options */
+.form-select option {
+    background-color: #151515;
+    color: #ffffff;
+}
+
+/* Date input */
+input[type="date"] {
+    background-color: #151515 !important;
+    color: #ffffff !important;
+    color-scheme: dark;
+}
+
+/* Date calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Autofill / browser populated values */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #151515 inset !important;
+    box-shadow: 0 0 0px 1000px #151515 inset !important;
+    background-color: #151515 !important;
+}

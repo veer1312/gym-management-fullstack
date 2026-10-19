@@ -1,0 +1,249 @@
+
+<app-loader></app-loader>
+<div class="member-details-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h2>
+        <i class="fa-solid fa-user-check"></i>
+        Member Details
+      </h2>
+      <p>View member information and payment history</p>
+    </div>
+
+    <button class="back-btn" type="button" (click)="goBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div class="member-card" *ngIf="loading">
+    <p class="info-item">Loading member details...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="member-card" *ngIf="!loading && errorMessage">
+    <p class="info-item">{{ errorMessage }}</p>
+  </div>
+
+  <ng-container *ngIf="!loading && member as m">
+
+    <!-- Member Details -->
+    <div class="member-card">
+
+      <div class="member-card-header">
+        <div class="member-profile">
+          <div class="member-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <div>
+            <h3>{{ m.userName }}</h3>
+            <span class="member-id">
+              Member ID: #{{ m.userId }}
+            </span>
+          </div>
+        </div>
+
+        <span class="status-badge active">
+          <i class="fa-solid fa-circle"></i>
+          Member
+        </span>
+      </div>
+
+      <!-- Important Details -->
+      <div class="member-info-grid">
+
+        <div class="info-item">
+          <span class="info-label">
+            <i class="fa-solid fa-envelope"></i>
+            Email
+          </span>
+          <strong>{{ m.email || 'N/A' }}</strong>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">
+            <i class="fa-solid fa-phone"></i>
+            Contact
+          </span>
+          <strong>{{ m.contactNumber || 'N/A' }}</strong>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">
+            <i class="fa-solid fa-id-card"></i>
+            Membership
+          </span>
+          <strong>
+            {{ getMembershipName(m.membership, m.membershipId) }}
+          </strong>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">
+            <i class="fa-solid fa-calendar-days"></i>
+            Start Date
+          </span>
+          <strong>
+            {{ m.membershipStartDate ? (m.membershipStartDate | date:'dd MMM yyyy') : 'N/A' }}
+          </strong>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            End Date
+          </span>
+          <strong>
+            {{ m.membershipEndDate ? (m.membershipEndDate | date:'dd MMM yyyy') : 'N/A' }}
+          </strong>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">
+            <i class="fa-solid fa-location-dot"></i>
+            Address
+          </span>
+          <strong>{{ m.address || 'N/A' }}</strong>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Payment History -->
+    <div class="payment-card">
+
+      <div class="payment-header">
+        <div>
+          <h3>
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Payment History
+          </h3>
+          <p>All payments made by this member</p>
+        </div>
+
+        <div class="total-payment">
+          <span>Total Paid</span>
+          <strong>{{ totalPaid | currency:'INR':'symbol':'1.0-2' }}</strong>
+        </div>
+      </div>
+
+      <!-- Scrollable Table -->
+      <div class="payment-table-wrapper">
+
+        <table class="payment-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Payment Date</th>
+              <th>Membership</th>
+              <th>Amount</th>
+              <th>Payment Method</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let payment of paginatedPayments; let i = index">
+
+              <td>
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </td>
+
+              <td>
+                <span class="date">
+                  {{ payment.paymentDate ? (payment.paymentDate | date:'dd MMM yyyy') : 'N/A' }}
+                </span>
+              </td>
+
+              <td>
+                <span class="membership-badge">
+                  {{ getMembershipName(payment.membership, m.membershipId) }}
+                </span>
+              </td>
+
+              <td>
+                <strong class="amount">
+                  {{ payment.amount | currency:'INR':'symbol':'1.0-2' }}
+                </strong>
+              </td>
+
+              <td>
+                <span class="payment-method">
+                  <i class="fa-solid fa-money-bill-wave"></i>
+                  {{ payment.paymentMethod || 'N/A' }}
+                </span>
+              </td>
+
+              <td>
+                <span class="payment-status">
+                  <i class="fa-solid fa-circle-check"></i>
+                  Paid
+                </span>
+              </td>
+
+            </tr>
+
+            <tr *ngIf="payments.length === 0">
+              <td colspan="6" class="empty-payment">
+                <i class="fa-solid fa-receipt"></i>
+                No payment history available for this member.
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+
+        <span class="pagination-info">
+          Showing {{ startRecord }}–{{ endRecord }}
+          of {{ payments.length }} payments
+        </span>
+
+        <div class="pagination">
+
+          <button
+            type="button"
+            class="page-btn"
+            [class.disabled]="currentPage === 1"
+            [disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)"
+            aria-label="Previous page">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <button
+            type="button"
+            class="page-btn"
+            *ngFor="let page of pageNumbers"
+            [class.active]="currentPage === page"
+            [attr.aria-current]="currentPage === page ? 'page' : null"
+            (click)="changePage(page)">
+            {{ page }}
+          </button>
+
+          <button
+            type="button"
+            class="page-btn"
+            [class.disabled]="currentPage === totalPages || totalPages === 0"
+            [disabled]="currentPage === totalPages || totalPages === 0"
+            (click)="changePage(currentPage + 1)"
+            aria-label="Next page">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</div>

@@ -1,0 +1,11 @@
+<div
+  *ngIf="loading$ | async"
+  class="loader-container full-screen"
+  role="status"
+  aria-live="polite"
+>
+  <div class="loader-content">
+    <i class="fa-solid fa-dumbbell dumbbell-loader"></i>
+    <p>Loading...</p>
+  </div>
+</div>

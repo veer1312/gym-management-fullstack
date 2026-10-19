@@ -1,0 +1,115 @@
+
+.gym-footer {
+  min-height: 55px;
+
+  background: #111111;
+  border-top: 1px solid #2a2a2a;
+
+  color: #888888;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  font-size: 12px;
+}
+
+/* =========================
+   LEFT
+========================= */
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-left strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.separator {
+  color: #3a3a3a;
+}
+
+/* =========================
+   RIGHT
+========================= */
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #888888;
+
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.footer-link i {
+  font-size: 12px;
+}
+
+.footer-link:hover {
+  color: #e50914;
+}
+
+.version {
+  color: #555555;
+
+  padding-left: 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .gym-footer {
+    padding: 12px 15px;
+
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 8px;
+  }
+
+  .footer-left {
+    justify-content: center;
+  }
+
+  .footer-right {
+    gap: 12px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .footer-left {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .footer-right {
+    gap: 10px;
+  }
+
+}
+

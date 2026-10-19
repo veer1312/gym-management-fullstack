@@ -1,0 +1,443 @@
+/* Member List */
+
+.page-container {
+padding: 28px 26px 40px;
+color: #fff;
+}
+
+/* Header */
+
+.page-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+margin-bottom: 24px;
+}
+
+.breadcrumb {
+display: flex;
+align-items: center;
+gap: 8px;
+color: #777;
+font-size: 12px;
+margin-bottom: 8px;
+}
+
+.breadcrumb i {
+font-size: 9px;
+}
+
+.page-header h1 {
+margin: 0;
+font-size: 25px;
+font-weight: 700;
+color: #fff;
+}
+
+.page-header p {
+margin: 5px 0 0;
+color: #777;
+font-size: 13px;
+}
+
+/* Summary */
+
+.summary-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 18px;
+margin-bottom: 18px;
+}
+
+.summary-card {
+background: #151515;
+border: 1px solid #292929;
+border-radius: 10px;
+padding: 18px;
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.summary-icon {
+width: 42px;
+height: 42px;
+border-radius: 9px;
+background: rgba(237, 7, 18, .12);
+color: #ed0712;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.summary-content span,
+.summary-content small {
+color: #777;
+font-size: 11px;
+}
+
+.summary-content h2 {
+margin: 3px 0;
+color: #fff;
+font-size: 21px;
+}
+
+.summary-content small {
+color: #555;
+font-size: 10px;
+}
+
+/* Main Card */
+
+.member-list-card {
+background: #151515;
+border: 1px solid #292929;
+border-radius: 10px;
+overflow: hidden;
+}
+
+/* List Header */
+
+.list-header,
+.filter-section,
+.table-footer {
+padding: 18px 20px;
+border-bottom: 1px solid #292929;
+}
+
+.list-header,
+.table-footer,
+.payment-month {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.list-header h3 {
+margin: 0;
+color: #fff;
+font-size: 15px;
+}
+
+.list-header p {
+margin: 4px 0 0;
+color: #6f6f6f;
+font-size: 12px;
+}
+
+.header-count {
+padding: 7px 12px;
+background: #101010;
+border: 1px solid #303030;
+border-radius: 6px;
+color: #999;
+font-size: 11px;
+}
+
+/* Filters */
+
+.filter-section {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.search-box {
+position: relative;
+flex: 1;
+}
+
+.search-box i {
+position: absolute;
+left: 13px;
+top: 50%;
+transform: translateY(-50%);
+color: #555;
+font-size: 12px;
+}
+
+.search-box input,
+.filter-item select {
+height: 40px;
+background: #101010;
+border: 1px solid #303030;
+border-radius: 6px;
+color: #ddd;
+font-size: 12px;
+outline: none;
+}
+
+.search-box input {
+width: 100%;
+padding: 0 12px 0 36px;
+}
+
+.filter-item select {
+width: 155px;
+padding: 0 12px;
+}
+
+.search-box input:focus,
+.filter-item select:focus {
+border-color: #ed0712;
+}
+
+.search-box input::placeholder {
+color: #555;
+}
+
+.btn-filter-reset {
+height: 40px;
+padding: 0 14px;
+background: #191919;
+border: 1px solid #303030;
+border-radius: 6px;
+color: #999;
+font-size: 12px;
+}
+
+.btn-filter-reset i {
+margin-right: 5px;
+}
+
+/* Payment Month */
+
+.payment-month {
+padding: 12px 20px;
+background: #101010;
+border-bottom: 1px solid #292929;
+color: #777;
+font-size: 11px;
+}
+
+.payment-month div {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.payment-month i {
+color: #ed0712;
+}
+
+.payment-month strong {
+color: #ccc;
+}
+
+/* Table */
+
+.table-responsive {
+overflow-x: auto;
+}
+
+.member-table {
+width: 100%;
+min-width: 1100px;
+border-collapse: collapse;
+}
+
+.member-table thead {
+background: #191919;
+}
+
+.member-table th {
+padding: 13px 15px;
+color: #777;
+font-size: 10px;
+font-weight: 600;
+text-align: left;
+text-transform: uppercase;
+white-space: nowrap;
+}
+
+.member-table td {
+padding: 14px 15px;
+color: #999;
+font-size: 12px;
+border-top: 1px solid #242424;
+white-space: nowrap;
+}
+
+.member-table tbody tr:hover {
+background: #1b1b1b;
+}
+
+/* Member */
+
+.member-info {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.member-avatar {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+background: rgba(237, 7, 18, .12);
+color: #ed0712;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+font-weight: 700;
+}
+
+.member-info strong {
+display: block;
+color: #ddd;
+font-size: 12px;
+}
+
+.member-info span {
+color: #555;
+font-size: 10px;
+}
+
+.membership-name {
+color: #bbb;
+}
+
+/* Badges */
+
+.payment-badge,
+.status-badge {
+display: inline-flex;
+align-items: center;
+gap: 5px;
+padding: 5px 9px;
+border-radius: 5px;
+font-size: 10px;
+font-weight: 600;
+}
+
+.payment-badge.paid,
+.status-badge.active {
+background: rgba(40, 167, 69, .1);
+color: #55b96d;
+}
+
+.payment-badge.pending {
+background: rgba(255, 193, 7, .08);
+color: #d4a62a;
+}
+
+.payment-badge.partial {
+background: rgba(0, 123, 255, .08);
+color: #6299d1;
+}
+
+.status-badge.expired {
+background: rgba(237, 7, 18, .1);
+color: #ed6269;
+}
+
+.status-badge.inactive {
+background: #202020;
+color: #777;
+}
+
+/* Action */
+
+.btn-view {
+height: 32px;
+padding: 0 11px;
+background: #191919;
+border: 1px solid #303030;
+border-radius: 6px;
+color: #aaa;
+font-size: 11px;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+cursor: pointer;
+}
+
+.btn-view:hover {
+background: #ed0712;
+border-color: #ed0712;
+color: #fff;
+}
+
+/* Footer */
+
+.table-footer {
+border-bottom: 0;
+color: #666;
+font-size: 11px;
+}
+
+.showing-text strong {
+color: #aaa;
+}
+
+.pagination {
+display: flex;
+gap: 5px;
+}
+
+.pagination-btn {
+width: 30px;
+height: 30px;
+background: #191919;
+border: 1px solid #303030;
+border-radius: 6px;
+color: #777;
+font-size: 11px;
+}
+
+.pagination-btn.active {
+background: #ed0712;
+border-color: #ed0712;
+color: #fff;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+.summary-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 900px) {
+.filter-section {
+flex-wrap: wrap;
+}
+
+.search-box {
+flex: 1 1 100%;
+}
+}
+
+@media (max-width: 600px) {
+.page-container {
+padding: 20px 15px;
+}
+
+.page-header {
+align-items: flex-start;
+flex-direction: column;
+gap: 15px;
+}
+
+.summary-grid {
+grid-template-columns: 1fr;
+}
+
+.filter-section {
+flex-direction: column;
+align-items: stretch;
+}
+
+.filter-item select {
+width: 100%;
+}
+
+.payment-month,
+.table-footer {
+align-items: flex-start;
+flex-direction: column;
+gap: 10px;
+}
+}

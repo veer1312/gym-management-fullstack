@@ -1,0 +1,392 @@
+<app-loader></app-loader>
+
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumb">
+        <span>Members</span>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Member List</span>
+      </div>
+
+      <h1>Members</h1>
+      <p>Manage your gym members and their payments</p>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+
+    <!-- Total Members -->
+    <div class="summary-card">
+      <div class="summary-icon">
+        <i class="fa-solid fa-users"></i>
+      </div>
+
+      <div class="summary-content">
+        <span>Total Members</span>
+        <h2>{{ totalElements }}</h2>
+        <small>Matching registered members</small>
+      </div>
+    </div>
+
+    <!-- Active Members -->
+    <div class="summary-card">
+      <div class="summary-icon">
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+
+      <div class="summary-content">
+        <span>Active Members</span>
+        <h2>—</h2>
+        <small>Currently active</small>
+      </div>
+    </div>
+
+    <!-- Payment Received -->
+    <div class="summary-card">
+      <div class="summary-icon">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+
+      <div class="summary-content">
+        <span>This Month Paid</span>
+        <h2>—</h2>
+        <small>Current month</small>
+      </div>
+    </div>
+
+    <!-- Pending Payment -->
+    <div class="summary-card">
+      <div class="summary-icon">
+        <i class="fa-solid fa-clock"></i>
+      </div>
+
+      <div class="summary-content">
+        <span>Pending Payment</span>
+        <h2>—</h2>
+        <small>Members pending</small>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Member List Card -->
+  <div class="form-card member-list-card">
+
+    <!-- Card Header -->
+    <div class="list-header">
+      <div>
+        <h3>Member List</h3>
+        <p>View and manage all gym members</p>
+      </div>
+
+      <div class="header-count">
+        <span>{{ totalElements }} Members</span>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-section">
+
+      <!-- Search -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+          type="text"
+          placeholder="Search by name, phone or email..."
+          [(ngModel)]="search"
+          (keyup.enter)="onSearch()"
+        />
+      </div>
+
+      <!-- Membership Status -->
+      <div class="filter-item">
+        <select
+          [(ngModel)]="status"
+          (change)="onStatusChange()"
+        >
+          <option value="">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="Expired">Expired</option>
+        </select>
+      </div>
+
+      <!-- Search Button -->
+      <button
+        type="button"
+        class="btn-filter-reset"
+        (click)="onSearch()"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Search
+      </button>
+
+      <!-- Reset -->
+      <button
+        type="button"
+        class="btn-filter-reset"
+        (click)="resetFilters()"
+      >
+        <i class="fa-solid fa-rotate-left"></i>
+        Reset
+      </button>
+
+    </div>
+
+    <!-- Current Month -->
+    <div class="payment-month">
+      <div>
+        <i class="fa-regular fa-calendar"></i>
+        <span>Current Month Payment</span>
+      </div>
+
+      <strong>{{ currentMonthLabel }}</strong>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+
+      <table class="member-table">
+
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Member</th>
+            <th>Phone</th>
+            <th>Membership</th>
+            <th>Payment Date</th>
+            <th>Expiry Date</th>
+            <th>Monthly Fee</th>
+            <!-- <th>Payment Date</th> -->
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- Loading -->
+          <tr *ngIf="loading">
+            <td colspan="11" style="text-align: center;">
+              Loading members...
+            </td>
+          </tr>
+
+          <!-- API Error -->
+          <tr *ngIf="!loading && errorMessage">
+            <td colspan="11" style="text-align: center;">
+              {{ errorMessage }}
+            </td>
+          </tr>
+
+          <!-- No Members -->
+          <tr *ngIf="!loading && !errorMessage && members.length === 0">
+            <td colspan="11" style="text-align: center;">
+              No members found.
+            </td>
+          </tr>
+
+          <!-- Dynamic Members -->
+          <tr
+            *ngFor="let member of members; let i = index"
+          >
+
+            <td>
+              {{ currentPage * pageSize + i + 1 }}
+            </td>
+
+            <!-- Member Information -->
+            <td>
+              <div class="member-info">
+
+                <div class="member-avatar">
+                  {{ member.name?.charAt(0)?.toUpperCase() }}
+                </div>
+
+                <div>
+                  <strong>{{ member.name }}</strong>
+                  <span>{{ member.email }}</span>
+                </div>
+
+              </div>
+            </td>
+
+            <!-- Phone -->
+            <td>
+              {{ member.contactNumber }}
+            </td>
+
+            <!-- Membership -->
+            <td>
+              <span class="membership-name">
+                {{ member.membership }}
+              </span>
+            </td>
+
+            <!-- Start Date -->
+            <td>
+              {{
+                member.membershipStartDate
+                  ? (member.membershipStartDate | date:'dd MMM yyyy')
+                  : '—'
+              }}
+            </td>
+
+            <!-- Expiry Date -->
+            <td>
+              {{
+                member.membershipEndDate
+                  ? (member.membershipEndDate | date:'dd MMM yyyy')
+                  : '—'
+              }}
+            </td>
+
+            <!-- Latest Payment Amount -->
+            <td>
+              <strong>
+                {{
+                  member.amount != null
+                    ? (member.amount | currency:'INR':'symbol':'1.0-2')
+                    : '—'
+                }}
+              </strong>
+            </td>
+
+            <!-- Latest Payment Date -->
+            <!-- <td>
+              {{
+                member.paymentDate
+                  ? (member.paymentDate | date:'dd MMM yyyy')
+                  : '—'
+              }}
+            </td> -->
+
+            <!-- Payment Status -->
+            <td>
+              <span
+                class="payment-badge"
+                [ngClass]="{
+                  'paid': member.paymentStatus === 'Paid',
+                  'pending': member.paymentStatus === 'Pending'
+                }"
+              >
+                <i
+                  class="fa-solid"
+                  [ngClass]="{
+                    'fa-check': member.paymentStatus === 'Paid',
+                    'fa-clock': member.paymentStatus === 'Pending'
+                  }"
+                ></i>
+
+                {{ member.paymentStatus }}
+              </span>
+            </td>
+
+            <!-- Membership Status -->
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'active': member.status === 'Active',
+                  'expired': member.status === 'Expired',
+                  'inactive': member.status === 'Inactive'
+                }"
+              >
+                {{ member.status }}
+              </span>
+            </td>
+
+            <!-- Action -->
+            <td>
+              <button
+                type="button"
+                class="btn-view"
+                title="View Details"
+                (click)="userDetails(member.id)"
+              >
+                <i class="fa-solid fa-eye"></i>
+                View
+              </button>
+              <button
+                type="button"
+                class="btn-view"
+                title="View Details"
+                (click)="editUSer(member.id)"
+              >
+                <i class="fa-solid fa-pen"></i>
+                Edit
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- Table Footer -->
+    <div class="table-footer">
+
+      <div class="showing-text">
+        Showing
+        <strong>
+          {{ totalElements === 0 ? 0 : currentPage * pageSize + 1 }}
+        </strong>
+        to
+        <strong>
+          {{ currentPage * pageSize + members.length }}
+        </strong>
+        of
+        <strong>{{ totalElements }}</strong>
+        members
+      </div>
+
+      <div class="pagination">
+
+        <!-- Previous -->
+        <button
+          type="button"
+          class="pagination-btn"
+          [disabled]="currentPage === 0 || loading"
+          (click)="previousPage()"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- Page Numbers -->
+        <button
+          type="button"
+          class="pagination-btn"
+          *ngFor="let page of pageNumbers"
+          [class.active]="currentPage === page"
+          [disabled]="loading"
+          (click)="goToPage(page)"
+        >
+          {{ page + 1 }}
+        </button>
+
+        <!-- Next -->
+        <button
+          type="button"
+          class="pagination-btn"
+          [disabled]="currentPage >= totalPages - 1 || loading"
+          (click)="nextPage()"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

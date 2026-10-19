@@ -1,0 +1,250 @@
+
+<aside
+  class="sidebar"
+  [class.collapsed]="isCollapsed"
+  [class.mobile-open]="isMobileOpen"
+>
+
+  <!-- =========================
+       SIDEBAR HEADER
+  ========================== -->
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-brand">
+
+      <div class="brand-icon">
+        <i class="fa-solid fa-dumbbell"></i>
+      </div>
+
+      <div class="brand-text">
+        <span class="brand-name">GYM</span>
+        <span class="brand-pro">PRO</span>
+      </div>
+
+    </div>
+
+    <!-- Desktop collapse button -->
+    <button
+      class="collapse-btn"
+      (click)="toggleSidebar()"
+      aria-label="Toggle sidebar"
+    >
+      <i
+        class="fa-solid"
+        [class.fa-angles-left]="!isCollapsed"
+        [class.fa-angles-right]="isCollapsed"
+      ></i>
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       MENU
+  ========================== -->
+
+  <nav class="sidebar-menu">
+
+    <p class="menu-title">MAIN MENU</p>
+
+
+    <!-- Dashboard -->
+
+    <a
+      routerLink="user/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Dashboard"
+    >
+      <i class="fa-solid fa-gauge-high"></i>
+      <span>Dashboard</span>
+    </a>
+
+
+    <!-- Members -->
+
+    <a
+      routerLink="user/add-members"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="add-members"
+    >
+      <i class="fa-solid fa-users"></i>
+      <span>Add Members</span>
+    </a>
+
+
+    <!-- Member List -->
+
+    <a
+      routerLink="user/member-list"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="member-list"
+    >
+      <i class="fa-solid fa-user-check"></i>
+      <span>Registered Members</span>
+    </a>
+    <!-- Payments -->
+
+    <a
+      routerLink="payment/add-payment"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Payments"
+    >
+      <i class="fa-solid fa-money-bill-wave"></i>
+      <span>Payments</span>
+    </a>
+
+
+    <!-- Services -->
+
+    <a
+      routerLink="/services"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Services"
+    >
+      <i class="fa-solid fa-dumbbell"></i>
+      <span>Services</span>
+    </a>
+
+
+    <!-- =========================
+         MANAGEMENT
+    ========================== -->
+
+    <p class="menu-title">MANAGEMENT</p>
+
+
+    <!-- Trainers -->
+
+    <a
+      routerLink="/trainers"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Trainers"
+    >
+      <i class="fa-solid fa-person-running"></i>
+      <span>Trainers</span>
+    </a>
+
+
+    <!-- Attendance -->
+
+    <a
+      routerLink="/attendance"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Attendance"
+    >
+      <i class="fa-solid fa-calendar-check"></i>
+      <span>Attendance</span>
+    </a>
+
+
+    <!-- Reports -->
+
+    <a
+      routerLink="/reports"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Reports"
+    >
+      <i class="fa-solid fa-chart-column"></i>
+      <span>Reports</span>
+    </a>
+
+
+    <!-- =========================
+         SYSTEM
+    ========================== -->
+
+    <p class="menu-title">SYSTEM</p>
+
+
+    <!-- Settings -->
+
+    <a
+      routerLink="/settings"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Settings"
+    >
+      <i class="fa-solid fa-gear"></i>
+      <span>Settings</span>
+    </a>
+
+
+    <!-- Contact -->
+
+    <a
+      routerLink="/contact"
+      routerLinkActive="active"
+      class="menu-item"
+      (click)="closeMobileSidebar()"
+      title="Contact"
+    >
+      <i class="fa-solid fa-headset"></i>
+      <span>Contact</span>
+    </a>
+
+  </nav>
+
+
+  <!-- =========================
+       USER / LOGOUT
+  ========================== -->
+
+  <div class="sidebar-bottom">
+
+    <div class="sidebar-user">
+
+      <div class="user-avatar">
+        B
+      </div>
+
+      <div class="user-info">
+        <strong>Biplab</strong>
+        <span>Administrator</span>
+      </div>
+
+    </div>
+
+
+    <button
+      class="logout-btn"
+      title="Logout"
+      (click)="logout()"
+    >
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Logout</span>
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- =========================
+     MOBILE OVERLAY
+========================== -->
+
+<div
+  class="sidebar-overlay"
+  [class.show]="isMobileOpen"
+  (click)="closeMobileSidebar()"
+></div>
+

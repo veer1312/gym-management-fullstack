@@ -1,0 +1,538 @@
+
+.dashboard {
+  padding: 25px;
+  background: #0d0d0d;
+  min-height: calc(100vh - 125px);
+  color: #ffffff;
+}
+
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  margin: 6px 0 0;
+
+  color: #888888;
+  font-size: 13px;
+}
+
+.add-member-btn {
+  border: none;
+  border-radius: 7px;
+
+  padding: 11px 18px;
+
+  background: #e50914;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.add-member-btn i {
+  margin-right: 7px;
+}
+
+.add-member-btn:hover {
+  background: #ff1a25;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #151515;
+
+  border: 1px solid #252525;
+
+  border-radius: 10px;
+
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  border-color: #3a3a3a;
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+
+  min-width: 48px;
+
+  border-radius: 9px;
+
+  background: #2a1012;
+  color: #e50914;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 19px;
+}
+
+.stat-icon.warning {
+  background: #2b2110;
+  color: #f5a623;
+}
+
+.stat-title {
+  display: block;
+
+  color: #888888;
+
+  font-size: 12px;
+
+  margin-bottom: 5px;
+}
+
+.stat-content h2 {
+  margin: 0 0 7px;
+
+  font-size: 22px;
+}
+
+.stat-growth {
+  font-size: 11px;
+}
+
+.positive {
+  color: #37c978;
+}
+
+.warning-text {
+  color: #f5a623;
+}
+
+
+/* =========================
+   MIDDLE GRID
+========================= */
+
+.middle-grid {
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   DASHBOARD CARD
+========================= */
+
+.dashboard-card {
+  background: #151515;
+
+  border: 1px solid #252525;
+
+  border-radius: 10px;
+
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.card-header h3 {
+  margin: 0;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card-header p {
+  margin: 5px 0 0;
+
+  color: #777777;
+
+  font-size: 11px;
+}
+
+.card-header select {
+  background: #202020;
+
+  color: #bbbbbb;
+
+  border: 1px solid #333333;
+
+  border-radius: 5px;
+
+  padding: 7px 10px;
+
+  font-size: 11px;
+
+  outline: none;
+}
+
+.view-all {
+  color: #e50914;
+
+  text-decoration: none;
+
+  font-size: 11px;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   CHART
+========================= */
+
+.chart-container {
+  height: 230px;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.chart-bars {
+  width: 100%;
+  height: 190px;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-around;
+
+  border-bottom: 1px solid #303030;
+}
+
+.bar-item {
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+}
+
+.bar {
+  width: 35px;
+
+  background: #e50914;
+
+  border-radius: 5px 5px 0 0;
+
+  min-height: 20px;
+
+  transition: 0.3s;
+}
+
+.bar:hover {
+  background: #ff1a25;
+}
+
+.bar-item span {
+  color: #666666;
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   PAYMENTS
+========================= */
+
+.payment-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.payment-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px 5px;
+
+  border-bottom: 1px solid #242424;
+}
+
+.payment-item:last-child {
+  border-bottom: none;
+}
+
+.member-avatar {
+  width: 35px;
+  height: 35px;
+
+  min-width: 35px;
+
+  border-radius: 50%;
+
+  background: #2a1012;
+
+  color: #e50914;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.payment-info {
+  display: flex;
+
+  flex-direction: column;
+
+  flex: 1;
+}
+
+.payment-info strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.payment-info span {
+  color: #666666;
+
+  font-size: 10px;
+
+  margin-top: 3px;
+}
+
+.payment-amount {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+}
+
+.payment-amount strong {
+  font-size: 12px;
+}
+
+.payment-amount span {
+  margin-top: 3px;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.paid {
+  color: #37c978;
+  font-size: 10px;
+}
+
+.pending {
+  color: #f5a623;
+  font-size: 10px;
+}
+
+.status {
+  display: inline-block;
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+}
+
+.status.active {
+  background: #10291c;
+  color: #37c978;
+}
+
+.pending-status {
+  background: #2b2110;
+  color: #f5a623;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.members-card {
+  overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+thead {
+  background: #1b1b1b;
+}
+
+th {
+  padding: 12px;
+
+  text-align: left;
+
+  color: #777777;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+td {
+  padding: 13px 12px;
+
+  border-bottom: 1px solid #242424;
+
+  color: #aaaaaa;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+tbody tr {
+  transition: 0.2s;
+}
+
+tbody tr:hover {
+  background: #1b1b1b;
+}
+
+.table-member {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.table-member strong {
+  display: block;
+
+  color: #eeeeee;
+
+  font-size: 11px;
+}
+
+.table-member span {
+  display: block;
+
+  color: #555555;
+
+  font-size: 9px;
+
+  margin-top: 3px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .middle-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .dashboard {
+    padding: 15px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .add-member-btn {
+    padding: 9px 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

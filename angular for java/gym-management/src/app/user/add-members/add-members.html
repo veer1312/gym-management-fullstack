@@ -1,0 +1,634 @@
+<app-loader></app-loader>
+
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumb">
+        <span>Members</span>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Add Member</span>
+      </div>
+
+      <h1>Add New Member</h1>
+      <p>Add a new member to your gym</p>
+    </div>
+
+    <button type="button" class="btn-back" (click)="goBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Members
+    </button>
+  </div>
+
+
+  <!-- Main Form -->
+  <form [formGroup]="memberForm" (ngSubmit)="addMember()" novalidate>
+
+    <!-- ========================= -->
+    <!-- MEMBER INFORMATION -->
+    <!-- ========================= -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div>
+          <h3>Member Information</h3>
+          <p>Enter the member's basic information</p>
+        </div>
+      </div>
+
+
+      <div class="form-grid">
+
+        <!-- Full Name -->
+        <div class="form-group">
+
+          <label>
+            Full Name <span>*</span>
+          </label>
+
+          <input type="text" formControlName="name" placeholder="Enter full name" />
+
+          <small class="error" *ngIf="
+              memberForm.get('name')?.errors?.['required'] &&
+              (
+                memberForm.get('name')?.touched ||
+                submitted
+              )
+            ">
+            Name is required.
+          </small>
+
+          <small class="error" *ngIf="
+              memberForm.get('name')?.errors?.['pattern'] &&
+              (
+                memberForm.get('name')?.touched ||
+                submitted
+              )
+            ">
+            Name should contain only characters.
+          </small>
+
+        </div>
+
+
+        <!-- Gender -->
+        <div class="form-group">
+
+          <label>
+            Gender <span>*</span>
+          </label>
+
+          <select formControlName="gender">
+
+            <option value="">
+              Select gender
+            </option>
+
+            <option value="Male">
+              Male
+            </option>
+
+            <option value="Female">
+              Female
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+          <small class="error" *ngIf="
+              memberForm.get('gender')?.invalid &&
+              (
+                memberForm.get('gender')?.touched ||
+                submitted
+              )
+            ">
+            Please select gender.
+          </small>
+
+        </div>
+
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+
+          <label>
+            Date of Birth <span>*</span>
+          </label>
+
+          <input type="date" formControlName="dateOfBirth" />
+
+          <small class="error" *ngIf="
+              memberForm.get('dateOfBirth')?.invalid &&
+              (
+                memberForm.get('dateOfBirth')?.touched ||
+                submitted
+              )
+            ">
+            Date of birth is required.
+          </small>
+
+        </div>
+
+
+        <!-- Email -->
+        <div class="form-group">
+
+          <label>
+            Email Address <span>*</span>
+          </label>
+
+          <input type="email" formControlName="email" placeholder="Enter email address" />
+
+          <small class="error" *ngIf="
+              memberForm.get('email')?.errors?.['required'] &&
+              (
+                memberForm.get('email')?.touched ||
+                submitted
+              )
+            ">
+            Email is required.
+          </small>
+
+          <small class="error" *ngIf="
+              memberForm.get('email')?.errors?.['email'] &&
+              (
+                memberForm.get('email')?.touched ||
+                submitted
+              )
+            ">
+            Please enter a valid email address.
+          </small>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="form-group">
+
+          <label>
+            Password
+          </label>
+
+          <input type="password" formControlName="password" placeholder="Enter password" />
+
+        </div>
+
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+
+          <label>
+            Confirm Password
+          </label>
+
+          <input type="password" formControlName="confirmPassword" placeholder="Confirm password" />
+
+          <small class="error" *ngIf="
+              memberForm.hasError('passwordMismatch') &&
+              (
+                memberForm.get('confirmPassword')?.touched ||
+                submitted
+              )
+            ">
+            Passwords do not match.
+          </small>
+
+        </div>
+
+
+        <!-- Phone -->
+        <div class="form-group">
+
+          <label>
+            Phone Number <span>*</span>
+          </label>
+
+          <input type="text" formControlName="contactNumber" placeholder="Enter phone number" maxlength="10" />
+
+          <small class="error" *ngIf="
+              memberForm.get('contactNumber')?.errors?.['required'] &&
+              (
+                memberForm.get('contactNumber')?.touched ||
+                submitted
+              )
+            ">
+            Phone number is required.
+          </small>
+
+          <small class="error" *ngIf="
+              memberForm.get('contactNumber')?.errors?.['pattern'] &&
+              (
+                memberForm.get('contactNumber')?.touched ||
+                submitted
+              )
+            ">
+            Enter a valid 10-digit phone number.
+          </small>
+
+        </div>
+
+
+        <!-- Address -->
+        <div class="form-group">
+
+          <label>
+            Address <span>*</span>
+          </label>
+
+          <input type="text" formControlName="address" placeholder="Enter address" />
+
+          <small class="error" *ngIf="
+              memberForm.get('address')?.invalid &&
+              (
+                memberForm.get('address')?.touched ||
+                submitted
+              )
+            ">
+            Address is required.
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MEMBERSHIP + PAYMENT -->
+    <!-- ========================= -->
+
+    <div class="two-column">
+
+
+      <!-- Membership -->
+      <div class="form-card">
+
+        <div class="card-header">
+
+          <div class="section-icon">
+            <i class="fa-solid fa-id-card"></i>
+          </div>
+
+          <div>
+            <h3>Membership Details</h3>
+            <p>Select membership plan</p>
+          </div>
+
+        </div>
+
+
+        <!-- Membership Plan -->
+        <div class="form-group">
+
+          <label>
+            Membership Plan <span>*</span>
+          </label>
+
+          <select formControlName="membershipId">
+
+            <option [ngValue]="null">
+              Select membership
+            </option>
+
+            <option *ngFor="let plan of membershipPlans" [ngValue]="plan.id">
+              {{ plan.membership }}
+            </option>
+
+          </select>
+
+          <small class="error" *ngIf="
+      memberForm.get('membershipId')?.invalid &&
+      (
+        memberForm.get('membershipId')?.touched ||
+        submitted
+      )
+    ">
+            Please select a membership plan.
+          </small>
+
+        </div>
+
+
+        <div class="form-grid two">
+
+          <!-- Start Date -->
+          <div class="form-group">
+
+            <label>
+              Start Date <span>*</span>
+            </label>
+
+            <input type="date" formControlName="membershipStartDate" />
+
+            <small class="error" *ngIf="
+                memberForm.get('membershipStartDate')?.invalid &&
+                (
+                  memberForm.get('membershipStartDate')?.touched ||
+                  submitted
+                )
+              ">
+              Start date is required.
+            </small>
+
+          </div>
+
+
+          <!-- End Date -->
+          <div class="form-group">
+
+            <label>
+              End Date
+            </label>
+
+            <input type="date" formControlName="membershipEndDate" />
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Payment -->
+      <div class="form-card">
+
+        <div class="card-header">
+
+          <div class="section-icon">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+
+          <div>
+            <h3>Payment Information</h3>
+            <p>Enter payment details</p>
+          </div>
+
+        </div>
+
+
+        <!-- Amount -->
+        <div class="form-group">
+
+          <label>
+            Amount <span>*</span>
+          </label>
+
+          <div class="amount-input">
+
+            <span>₹</span>
+
+            <input type="number" formControlName="amount" placeholder="Enter amount" min="1" />
+
+          </div>
+
+          <small class="error" *ngIf="
+              memberForm.get('amount')?.errors?.['required'] &&
+              (
+                memberForm.get('amount')?.touched ||
+                submitted
+              )
+            ">
+            Amount is required.
+          </small>
+
+          <small class="error" *ngIf="
+              memberForm.get('amount')?.errors?.['min'] &&
+              (
+                memberForm.get('amount')?.touched ||
+                submitted
+              )
+            ">
+            Amount must be greater than 0.
+          </small>
+
+        </div>
+
+
+        <!-- Payment Method -->
+        <div class="form-group">
+
+          <label>
+            Payment Method <span>*</span>
+          </label>
+
+          <select formControlName="paymentMethod">
+
+            <option value="">
+              Select payment method
+            </option>
+
+            <option value="Cash">
+              Cash
+            </option>
+
+            <option value="UPI">
+              UPI
+            </option>
+
+            <option value="Card">
+              Card
+            </option>
+
+            <option value="Bank Transfer">
+              Bank Transfer
+            </option>
+
+          </select>
+
+          <small class="error" *ngIf="
+              memberForm.get('paymentMethod')?.invalid &&
+              (
+                memberForm.get('paymentMethod')?.touched ||
+                submitted
+              )
+            ">
+            Please select a payment method.
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- EMERGENCY CONTACT -->
+    <!-- ========================= -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+
+        <div>
+          <h3>Emergency Contact</h3>
+          <p>Contact details in case of emergency</p>
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- Contact Name -->
+        <div class="form-group">
+
+          <label>
+            Contact Name <span>*</span>
+          </label>
+
+          <input type="text" formControlName="emergencyContactName" placeholder="Enter contact name" />
+
+          <small class="error" *ngIf="
+              memberForm.get('emergencyContactName')?.invalid &&
+              (
+                memberForm.get('emergencyContactName')?.touched ||
+                submitted
+              )
+            ">
+            Emergency contact name is required.
+          </small>
+
+        </div>
+
+
+        <!-- Relationship -->
+        <div class="form-group">
+
+          <label>
+            Relationship <span>*</span>
+          </label>
+
+          <select formControlName="emergencyRelationship">
+
+            <option value="">
+              Select relationship
+            </option>
+
+            <option value="Father">
+              Father
+            </option>
+
+            <option value="Mother">
+              Mother
+            </option>
+
+            <option value="Brother">
+              Brother
+            </option>
+
+            <option value="Sister">
+              Sister
+            </option>
+
+            <option value="Spouse">
+              Spouse
+            </option>
+
+            <option value="Friend">
+              Friend
+            </option>
+
+          </select>
+
+          <small class="error" *ngIf="
+              memberForm.get('emergencyRelationship')?.invalid &&
+              (
+                memberForm.get('emergencyRelationship')?.touched ||
+                submitted
+              )
+            ">
+            Please select relationship.
+          </small>
+
+        </div>
+
+
+        <!-- Emergency Phone -->
+        <div class="form-group">
+
+          <label>
+            Phone Number <span>*</span>
+          </label>
+
+          <input type="text" formControlName="emergencyContactNumber" placeholder="Enter phone number" maxlength="10" />
+
+          <small class="error" *ngIf="
+              memberForm.get('emergencyContactNumber')?.errors?.['required'] &&
+              (
+                memberForm.get('emergencyContactNumber')?.touched ||
+                submitted
+              )
+            ">
+            Emergency phone number is required.
+          </small>
+
+          <small class="error" *ngIf="
+              memberForm.get('emergencyContactNumber')?.errors?.['pattern'] &&
+              (
+                memberForm.get('emergencyContactNumber')?.touched ||
+                submitted
+              )
+            ">
+            Enter a valid 10-digit phone number.
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- ACTIONS -->
+    <!-- ========================= -->
+
+    <div class="form-actions">
+
+      <button type="button" class="btn-cancel" (click)="cancel()" [disabled]="loading">
+        Cancel
+      </button>
+
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+
+        <span *ngIf="!loading">
+
+          <i class="fa-solid fa-user-plus"></i>
+
+          Add Member
+
+        </span>
+
+
+        <span *ngIf="loading">
+
+          <i class="fa-solid fa-spinner fa-spin"></i>
+
+          Adding Member...
+
+        </span>
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

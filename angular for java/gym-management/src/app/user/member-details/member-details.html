@@ -1,0 +1,494 @@
+
+<app-loader></app-loader>
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+
+      <div class="breadcrumb">
+        <span>Members</span>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Edit Member</span>
+      </div>
+
+      <h1>Edit Member</h1>
+
+      <p>
+        Update member information and membership details
+      </p>
+
+    </div>
+
+
+    <button class="btn-back" type="button" (click)="cancel()">
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+      Back to Members
+
+    </button>
+
+  </div>
+
+
+  <!-- Main Form -->
+  <form [formGroup]="memberForm" (ngSubmit)="updateUser()">
+
+
+    <!-- =====================================================
+             MEMBER INFORMATION
+        ====================================================== -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+
+          <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <div>
+
+          <h3>Member Information</h3>
+
+          <p>
+            Update registered member details
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Profile Header -->
+
+      <div class="member-profile">
+
+        <div class="member-avatar">
+
+          {{ memberForm.get('name')?.value?.charAt(0) || 'M' }}
+
+        </div>
+
+
+        <div class="member-profile-info">
+
+          <h2>
+            {{ memberForm.get('name')?.value || 'Member' }}
+          </h2>
+
+          <span>
+            Member ID: MEM-{{ userId }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Details -->
+
+      <div class="details-grid">
+
+
+        <!-- Name -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Full Name
+            <span class="required">*</span>
+          </label>
+
+          <input type="text" class="form-control" formControlName="name" placeholder="Enter full name">
+
+          @if (
+          memberForm.get('name')?.invalid &&
+          memberForm.get('name')?.touched
+          ) {
+
+          <small class="error-message">
+            Please enter a valid name.
+          </small>
+
+          }
+
+        </div>
+
+
+        <!-- Phone -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Phone Number
+            <span class="required">*</span>
+          </label>
+
+          <input type="text" maxlength="10" class="form-control" formControlName="contactNumber"
+            placeholder="Enter phone number">
+
+          @if (
+          memberForm.get('contactNumber')?.invalid &&
+          memberForm.get('contactNumber')?.touched
+          ) {
+
+          <small class="error-message">
+            Enter a valid 10 digit number.
+          </small>
+
+          }
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Email Address
+            <span class="required">*</span>
+          </label>
+
+          <input type="email" class="form-control" formControlName="email" placeholder="Enter email address">
+
+          @if (
+          memberForm.get('email')?.invalid &&
+          memberForm.get('email')?.touched
+          ) {
+
+          <small class="error-message">
+            Enter a valid email address.
+          </small>
+
+          }
+
+        </div>
+
+
+        <!-- DOB -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Date of Birth
+            <span class="required">*</span>
+          </label>
+
+          <input type="date" class="form-control" formControlName="dateOfBirth">
+
+        </div>
+
+
+        <!-- Gender -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Gender
+            <span class="required">*</span>
+          </label>
+
+          <select class="form-select" formControlName="gender">
+
+            <option value="">
+              Select Gender
+            </option>
+
+            <option value="Male">
+              Male
+            </option>
+
+            <option value="Female">
+              Female
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Address -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Address
+            <span class="required">*</span>
+          </label>
+
+          <input type="text" class="form-control" formControlName="address" placeholder="Enter address">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+             MEMBERSHIP INFORMATION
+        ====================================================== -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+
+          <i class="fa-solid fa-id-card"></i>
+
+        </div>
+
+        <div>
+
+          <h3>Membership Information</h3>
+
+          <p>
+            Update current membership details
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="membership-grid">
+
+        <!-- Membership Plan -->
+        <div class="form-group">
+
+          <label>
+            Membership Plan <span>*</span>
+          </label>
+
+          <select formControlName="membershipId">
+
+            <option [ngValue]="null">
+              Select membership
+            </option>
+
+            <option *ngFor="let plan of membershipPlans" [ngValue]="plan.id">
+              {{ plan.membership }}
+            </option>
+
+          </select>
+
+          <small class="error" *ngIf="
+                memberForm.get('membershipId')?.invalid &&
+                (
+                    memberForm.get('membershipId')?.touched ||
+                    submitted
+                )
+            ">
+            Please select a membership plan.
+          </small>
+
+        </div>
+
+
+        <!-- Start Date -->
+        <div class="form-group">
+
+          <label>
+            Start Date <span>*</span>
+          </label>
+
+          <input type="date" formControlName="membershipStartDate" />
+
+          <small class="error" *ngIf="
+                memberForm.get('membershipStartDate')?.invalid &&
+                (
+                    memberForm.get('membershipStartDate')?.touched ||
+                    submitted
+                )
+            ">
+            Start date is required.
+          </small>
+
+        </div>
+
+
+        <!-- End Date -->
+        <div class="form-group">
+
+          <label>
+            End Date
+          </label>
+
+          <input type="date" formControlName="membershipEndDate" />
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+             EMERGENCY CONTACT
+        ====================================================== -->
+
+    <div class="form-card">
+
+      <div class="card-header">
+
+        <div class="section-icon">
+
+          <i class="fa-solid fa-phone"></i>
+
+        </div>
+
+        <div>
+
+          <h3>Emergency Contact</h3>
+
+          <p>
+            Update emergency contact information
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="details-grid">
+
+
+        <!-- Emergency Name -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Contact Name
+            <span class="required">*</span>
+          </label>
+
+          <input type="text" class="form-control" formControlName="emergencyContactName"
+            placeholder="Enter contact name">
+
+        </div>
+
+
+        <!-- Relationship -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Relationship
+            <span class="required">*</span>
+          </label>
+
+          <select class="form-select" formControlName="emergencyRelationship">
+
+            <option value="">
+              Select Relationship
+            </option>
+
+            <option value="Father">
+              Father
+            </option>
+
+            <option value="Mother">
+              Mother
+            </option>
+
+            <option value="Brother">
+              Brother
+            </option>
+
+            <option value="Sister">
+              Sister
+            </option>
+
+            <option value="Spouse">
+              Spouse
+            </option>
+
+            <option value="Friend">
+              Friend
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Emergency Number -->
+
+        <div class="detail-item form-group">
+
+          <label>
+            Contact Number
+            <span class="required">*</span>
+          </label>
+
+          <input type="text" maxlength="10" class="form-control" formControlName="emergencyContactNumber"
+            placeholder="Enter contact number">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+             ACTION BUTTONS
+        ====================================================== -->
+
+    <div class="form-card">
+
+      <div class="form-actions">
+
+        <button type="button" class="btn-cancel" (click)="cancel()">
+
+          <i class="fa-solid fa-xmark"></i>
+
+          Cancel
+
+        </button>
+
+
+        <button type="submit" class="btn-update" [disabled]="loading">
+
+          @if (loading) {
+
+          <span class="spinner"></span>
+
+          Updating...
+
+          } @else {
+
+          <i class="fa-solid fa-floppy-disk"></i>
+
+          Update Member
+
+          }
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </form>
+
+</div>
